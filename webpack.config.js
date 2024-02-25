@@ -1,11 +1,14 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
+
 let mode = 'development';
 
 if (process.env.NODE_ENV === 'production') {
     mode = 'production';
 }
 console.log(mode + ' mode');
-const path = require('path');
+
 
 module.exports = {
     mode: mode,//настраиваем режим сборки, код выше
@@ -15,11 +18,27 @@ module.exports = {
         // filename: 'main.js'
     },
     plugins: [
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css'
+        }),
         new HtmlWebpackPlugin({
             template: 'src/index.html',
             filename: 'index.html',
         })],
     module: {
-        rules: []
+        rules: [
+            {
+                test: /\.html$/i,
+                loader: "html-loader",
+            },
+            {
+                test: /\.(sa|sc|c)ss$/i,
+                use: [
+                    (mode === 'development') ? "style-loader" : MiniCssExtractPlugin.loader,
+                    "css-loader", "postcss-loader", "sass-loader"
+                ],
+            },
+
+        ]
     }
 }
