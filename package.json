@@ -1,0 +1,16 @@
+{
+  "name": "npmtest3",
+  "version": "0.0.0",
+  "description": "test webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "CodeMeYulia",
+  "license": "ISC",
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "webpack": "^5.90.3",
+    "webpack-cli": "^5.1.4"
+  }
+}
