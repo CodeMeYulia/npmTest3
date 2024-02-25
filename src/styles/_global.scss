@@ -1,0 +1,34 @@
+$primaryColor: darkblue;
+$secondColor: darkslategray;
+
+html {
+    font-family: generalFont;
+}
+
+.box {
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: $primaryColor;
+    font-size: 6em;
+    line-height: 1em;
+}
+
+.container {
+
+    &__subtitle {
+        color: $secondColor;
+        padding: 15px;
+    }
+}
+
+.back {
+    max-width: 70%;
+    margin: auto;
+}
+
+img {
+    width: 100%;
+}
