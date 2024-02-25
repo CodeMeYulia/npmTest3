@@ -5,24 +5,26 @@ const path = require('path');
 let mode = 'development';
 
 if (process.env.NODE_ENV === 'production') {
-    mode = 'production';
+    mode = 'production'
 }
+
 console.log(mode + ' mode');
 
-
 module.exports = {
-    mode: mode,//настраиваем режим сборки, код выше
     entry: './src/index.js',
-    output: { //точка выхода , аналог bandle.js из browserify
-        // path: path.resolve(__dirname, 'dist'),// всегда должен быть абсолютный путь (от корневой папки) в нашем случае npm_webpack - название папки в которой лежит проект path: './dist/' - нет. сейчас вызываем методо path.resolve и передаем ему два параметра __dirname - ссылка на текущую папку, так и пишется и dist - относительный путь до папки в которую будем все сохранять
+    output: {
+        // path: path.resolve(__dirname, './dist'),
         // filename: 'main.js'
+        assetModuleFilename: "assets/[hash][ext][query]",
+        clean: true,
     },
+    mode: mode,
     plugins: [
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css'
         }),
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
+            template: 'src/index.pug',
             filename: 'index.html',
         })],
     module: {
@@ -38,7 +40,20 @@ module.exports = {
                     "css-loader", "postcss-loader", "sass-loader"
                 ],
             },
+            {
+                test: /\.(png|svg|jpg|gif)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.(woff|woff2|eot|ttf|otf)$/i,
+                type: 'asset/resource',
+            },
+            {
+                test: /\.pug$/,
+                loader: 'pug-loader',
+                exclude: /(node_modules|bower_components)/,
 
-        ]
-    }
+            }
+        ],
+    },
 }
