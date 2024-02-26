@@ -18,6 +18,7 @@ module.exports = {
         assetModuleFilename: "assets/[hash][ext][query]",
         clean: true,
     },
+    devtool: 'source-map',
     mode: mode,
     plugins: [
         new MiniCssExtractPlugin({
@@ -52,8 +53,17 @@ module.exports = {
                 test: /\.pug$/,
                 loader: 'pug-loader',
                 exclude: /(node_modules|bower_components)/,
-
-            }
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    },
+                },
+            },
         ],
     },
 }

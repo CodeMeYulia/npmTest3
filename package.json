@@ -8,9 +8,17 @@
     "dev": "set NODE_ENV=development&&webpack",
     "build": "set NODE_ENV=production&&webpack"
   },
+  "browserslist": [
+    "last 2 versions",
+    ">1%",
+    "IE 10"
+  ],
   "author": "CodeMeYulia",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "babel-loader": "^9.1.3",
     "cross-env": "^7.0.3",
     "css-loader": "^6.10.0",
     "html-loader": "^5.0.0",
